@@ -46,8 +46,9 @@ void SeqListPrint(SeqList * psl)
 	//依次遍历顺序表每个节点，并打印节点中的元素值
 	for (size_t i = 0; i < psl->size; ++i)
 	{
-		printf("psl->array[%d]=%d\n", i, psl->array[i]);
+		printf("%d ", i, psl->array[i]);
 	}
+	printf("\n");
 
 }
 
@@ -139,6 +140,9 @@ void SeqListInsert(SeqList * psl, size_t pos, SLDataTpye x)
 {
 	//判断指针合法性
 	assert(psl);
+	//判断位置的合法性
+	assert(pos >= 0 || pos <= psl->size);
+
 	//检查空间，如果满了，进行增容
 	CheckCapacity(psl);
 
