@@ -46,14 +46,14 @@ void SeqListPrint(SeqList * psl)
 	//依次遍历顺序表每个节点，并打印节点中的元素值
 	for (size_t i = 0; i < psl->size; ++i)
 	{
-		printf("%d ", i, psl->array[i]);
+		printf("%d ", psl->array[i]);
 	}
 	printf("\n");
 
 }
 
 //2.5 顺序表尾插
-void SeqListPushBack(SeqList * psl, SLDataTpye x)
+void SeqListPushBack1(SeqList * psl, SLDataTpye x)
 {
 	//判断指针合法性
 	assert(psl);
@@ -63,9 +63,15 @@ void SeqListPushBack(SeqList * psl, SLDataTpye x)
 	psl->array[psl->size] = x;	//将数据x插入到线性表末尾
 	psl->size++;	//有效数据加1
 }
+//2.5 顺序表尾插调用Insert函数
+void SeqListPushBack(SeqList * psl, SLDataTpye x)
+{
+	//这里直接调用Insert插入函数
+	SeqListInsert(psl, psl->size, x);
+}
 
 //2.6 顺序表尾删
-void SeqListPopBack(SeqList * psl)
+void SeqListPopBack1(SeqList * psl)
 {
 	//判断指针合法性
 	assert(psl);
@@ -73,9 +79,14 @@ void SeqListPopBack(SeqList * psl)
 	//有效数据-1
 	psl->size--;
 }
+//2.6 顺序表尾删,调用Erase
+void SeqListPopBack(SeqList * psl)
+{
+	SeqListErase(psl, psl->size-1);
+}
 
 //2.7 顺序表头插
-void SeqListPushFront(SeqList * psl, SLDataTpye x)
+void SeqListPushFront1(SeqList * psl, SLDataTpye x)
 {
 	//判断指针合法性
 	assert(psl);
@@ -95,9 +106,16 @@ void SeqListPushFront(SeqList * psl, SLDataTpye x)
 	psl->size++;	//有效数据+1
 
 }
+//2.7 顺序表头插调用Insert
+void SeqListPushFront(SeqList * psl, SLDataTpye x)
+{
+	assert(psl);
+	SeqListInsert(psl, 0, x);
+
+}
 
 //2.8 顺序表头删
-void SeqListPopFront(SeqList * psl)
+void SeqListPopFront1(SeqList * psl)
 {
 	//判断指针合法性
 	assert(psl);
@@ -111,6 +129,11 @@ void SeqListPopFront(SeqList * psl)
 	}
 
 	psl->size--;	//有效数据-1
+}
+//2.8 顺序表头删,调用Erase
+void SeqListPopFront(SeqList * psl)
+{
+	SeqListErase(psl, 0);
 }
 
 //2.9 顺序表查找
@@ -135,13 +158,13 @@ int SeqListFind(SeqList * psl, SLDataTpye x)
 }
 
 
-//2.10 顺序表在pos位置插入
-void SeqListInsert(SeqList * psl, size_t pos, SLDataTpye x)
+//2.10 顺序表在pos位置插入1
+void SeqListInsert1(SeqList * psl, size_t pos, SLDataTpye x)
 {
 	//判断指针合法性
 	assert(psl);
 	//判断位置的合法性
-	assert(pos >= 0 || pos <= psl->size);
+	assert(pos <= psl->size);
 
 	//检查空间，如果满了，进行增容
 	CheckCapacity(psl);
@@ -159,13 +182,40 @@ void SeqListInsert(SeqList * psl, size_t pos, SLDataTpye x)
 	psl->size++;	//有效数据+1
 
 }
-
-
-//2.11 顺序表删除pos位置的值
-void SeqListErase(SeqList * psl, size_t pos)
+//2.10 顺序表在pos位置插入,如果想让尾插，头插调用这个函数需要对函数中数组的移动做一些改变
+void SeqListInsert(SeqList * psl, size_t pos, SLDataTpye x)
 {
 	//判断指针合法性
 	assert(psl);
+	//判断位置的合法性
+	assert(pos <= psl->size);
+
+	//检查空间，如果满了，进行增容
+	CheckCapacity(psl);
+
+	//end指向数组size的位置，然后从左向右移动
+	size_t end = psl->size;
+	//将pos位置的节点分别向后移动一个位置
+	while (end >pos)
+	{
+		//将前一个值赋值给当前位置
+		psl->array[end] = psl->array[end-1];
+		--end;
+	}
+
+	psl->array[pos] = x;	//将x插入到第pos个位置
+	psl->size++;	//有效数据+1
+
+}
+
+
+//2.11 顺序表删除pos位置的值
+void SeqListErase1(SeqList * psl, size_t pos)
+{
+	//判断指针合法性
+	assert(psl);
+	//判断位置的合法性，不能小于等于0并且大于size
+	assert(pos && pos <= psl->size);
 
 	size_t start = pos-1;	//指向要删除的位置
 	while (start < psl->size-1)
@@ -176,6 +226,23 @@ void SeqListErase(SeqList * psl, size_t pos)
 
 	psl->size--;	//有效数据-1
 }
+//2.11 顺序表删除pos位置的值,头删和尾删调用版本
+void SeqListErase(SeqList * psl, size_t pos)
+{
+
+	//判断位置的合法性，不能小于等于0并且大于size
+	assert(psl && pos < psl->size);
+
+	size_t start = pos+1;	//指向要删除的位置
+	while (start < psl->size)
+	{
+		psl->array[start-1] = psl->array[start];
+		++start;
+	}
+
+	psl->size--;	//有效数据-1
+}
+
 
 //2.12 顺序表销毁
 void SeqListDestory(SeqList * psl)
