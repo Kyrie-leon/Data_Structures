@@ -24,10 +24,10 @@ void SListPrint(SListNode * plist);
 void SListPushBack(SListNode** pplist, SLTDataType x);
 //单链表头插
 void SListPushFront(SListNode** pplist, SLTDataType x);
-//单链表头删
-void SListPopFront(SListNode** pplist, SLTDataType x);
 //单链表尾删
-void SListPopBack(SListNode** pplist, SLTDataType x);
+void SListPopBack(SListNode** pplist);
+//单链表头删
+void SListPopFront(SListNode** pplist);
 //单链表查找
 SListNode * SListFind(SListNode * plist, SLTDataType x);
 //单链表在任意位置之后插入x

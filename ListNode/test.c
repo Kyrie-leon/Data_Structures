@@ -19,6 +19,38 @@ void TestListNode1()
 	SListPushBack(&Plist, 5);
 	SListPrint(Plist);
 
+	//2.5 单链表头插
+	SListPushFront(&Plist, -1);
+	SListPrint(Plist);
+
+	//单链表尾删
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);
+	//SListPopBack(&Plist);	
+	//SListPopBack(&Plist);	
+	//SListPopBack(&Plist);
+	//SListPrint(Plist);
+
+	////单链表头删
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPopFront(&Plist);
+	SListPrint(Plist);
+
+	//2.8 单链表查找
+	SListNode * findNode = SListFind(Plist, 12);
+	printf("%d\n", findNode);
+
 
 }
 
