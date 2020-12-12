@@ -36,23 +36,33 @@ void TestListNode1()
 	//SListPopBack(&Plist);
 	//SListPrint(Plist);
 
-	////单链表头删
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPopFront(&Plist);
-	SListPrint(Plist);
+	//////单链表头删
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPopFront(&Plist);
+	//SListPrint(Plist);
 
 	//2.8 单链表查找
-	SListNode * findNode = SListFind(Plist, 12);
-	printf("%d\n", findNode);
+	SListNode * pos = SListFind(Plist, 3);
+	SListPrint(pos);
+
+	//2.9 单链表在任意位置之后插入x
+	SListInsertAfter(pos, 30);
+	SListPrint(Plist);
+
+	//2.10 单链表删除任意位置之后的值
+	SListEraseAfter(pos);
+	SListPrint(Plist);
 
 
 }
+
+
 
 int main()
 {

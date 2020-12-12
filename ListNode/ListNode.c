@@ -164,5 +164,20 @@ SListNode * SListFind(SListNode * plist, SLTDataType x)
 //2.9 单链表在任意位置之后插入x
 void SListInsertAfter(SListNode* pos, SLTDataType x)
 {
+	assert(pos);
+	SListNode * newNode = BuyListNode(x);
+	newNode->next = pos->next;
+	pos->next = newNode;
+}
 
+//2.10 单链表删除任意位置之后的值
+void SListEraseAfter(SListNode* pos)
+{
+	assert(pos);
+	if (pos->next)
+	{
+		SListNode * next = pos->next;	//找到pos位置后面的节点保存起来，防止删除后丢失
+		pos->next = next->next;			//pos位置节点指向next后的节点
+		free(next);		//释放pos后的节点
+	}
 }
