@@ -35,7 +35,7 @@ void StackPush(Stack * ps, STDataType data)
 void StackPop(Stack * ps)
 {
 	assert(ps);
-	assert(ps->_top);
+	assert(ps->_top>0);
 	ps->_top--;
 }
 
@@ -43,7 +43,7 @@ void StackPop(Stack * ps)
 STDataType StackTop(Stack *ps)
 {
 	assert(ps);
-	assert(ps->_top);
+	assert(ps->_top>0);
 
 	return ps->_a[ps->_top-1];	
 }
@@ -52,7 +52,6 @@ STDataType StackTop(Stack *ps)
 int StackSize(Stack * ps)
 {
 	assert(ps);
-	assert(ps->_top);
 	return ps->_top;
 }
 
