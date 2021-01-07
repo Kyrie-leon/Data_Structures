@@ -11,9 +11,12 @@ void TestStack()
 	StackPush(&ps, 5);
 	while (!StackEmpty(&ps))
 	{
-		printf("%d\n", StackTop(&ps));
+
+		printf("%d, %d\n", StackTop(&ps),StackSize(&ps));
 		StackPop(&ps);
 	}
+
+	
 }
 
 int main()
