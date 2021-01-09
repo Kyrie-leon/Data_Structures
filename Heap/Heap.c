@@ -8,29 +8,34 @@ void swap(HPDataType* p1, HPDataType* p2)
 	*p2 = tmp;
 }
 
-//前提：左右子树都是小堆
+//堆向下调整算法
 void AdjustDown(HPDataType* a, int n, int root)
 {
-	//找出左右孩子小的哪一个
+	//1.首先确定父节点与孩子节点，默认孩子节点为左孩子
 	int parent = root;
-	int child = parent * 2 + 1;	//左孩子
-	
+	int child = parent * 2 + 1;
+	//遍历二叉树，当孩子节点超出数组范围则停止
 	while (child < n)
 	{
-		//找出左右孩子小的那一个
-		if (child+1<n && a[child + 1] < a[child])
+		//找出左右孩子中最小的节点作为孩子节点
+		if ((child + 1 < n) && (a[child + 1] < a[child]))
 		{
-			++child;
+			child++;
 		}
 
-		//小数据上浮
-		if (a[child] < a[parent])
+		//如果父亲节点大于孩子节点则交换，否则退出循环
+		if ((child + 1 < n) && (a[parent] > a[child]))
 		{
-			swap(a[child],a[parent]);
-			parent++;
+			swap(&a[parent], &a[child]);	//交换
+			parent = child;		//孩子节点作为新的父节点
+			child = 2 * parent + 1;		//默认左孩子作为新的孩子节点
 		}
-
+		else
+		{
+			break;
+		}
 	}
+
 }
 
 void HeapInit(Heap * php, HPDataType * a, int n)
@@ -44,3 +49,5 @@ void HeapInit(Heap * php, HPDataType * a, int n)
 
 
 }
+
+
