@@ -186,3 +186,25 @@ void HeapPrint(HPDataType *a, int n)
 	}
 	printf("\n");
 }
+
+void PrintTopK(int* a, int n, int k)
+{
+	assert(a);
+
+	Heap hp;
+	//先建K个堆,小根堆
+	HeapInit(&hp, a, k);
+	//让数组中k后面的每个数和堆顶比较
+	int start = k;
+	while (start < n)
+	{
+		if (a[start] > hp._a[0])	//只要大于堆顶的数就交换，执行向下调整算法
+		{
+			hp._a[0] = a[start];
+			AdjustDown(hp._a, k, 0);
+		}
+		++start;
+	}
+	HeapPrint(hp._a, k);
+
+}

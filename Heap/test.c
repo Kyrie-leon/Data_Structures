@@ -44,9 +44,16 @@ void TestHeap()
 
 }
 
+void TestTopk()
+{
+	int a[] = { 27,15,19,18,28,34,65,49,25,37 };
+	PrintTopK(a, 10, 5);
+}
+
 int main()
 {
-	TestHeap();
+	//TestHeap();
+	TestTopk();
 
 	system("pause");
 	return 0;
