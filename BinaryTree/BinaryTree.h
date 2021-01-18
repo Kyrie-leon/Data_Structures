@@ -7,10 +7,12 @@ typedef char BTDataType;
 
 typedef struct BinaryTreeNode 
 {
+	BTDataType _data;	// 当前节点值域
+	struct BinaryTreeNode* _left;	// 指向当前节点左孩子
+	struct BinaryTreeNode* _right;	// 指向当前节点右孩子
 	BTDataType _data;
-	struct BinaryTreeNode* _left;
-	struct BinaryTreeNode* _right;
 }BTNode;
+
 
 //构建二叉树
 BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi);
@@ -31,16 +33,16 @@ int BinaryTreeLevelKSize(BTNode* root, int k);
 BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
 
 // 二叉树前序遍历
-void BinaryTreePrevOrder(BTNode* root);
+void PrevOrder(BTNode* root);
 
 // 二叉树中序遍历
-void BinaryTreeInOrder(BTNode* root);
+void InOrder(BTNode* root);
 
 // 二叉树后序遍历
-void BinaryTreePostOrder(BTNode* root);
+void PostOrder(BTNode* root);
 
 // 层序遍历
-void BinaryTreeLevelOrder(BTNode* root);
+void LevelOrder(BTNode* root);
 
 // 判断二叉树是否是完全二叉树
 int BinaryTreeComplete(BTNode* root);
