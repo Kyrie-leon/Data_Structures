@@ -3,8 +3,9 @@
 #include<stdlib.h>
 #include<assert.h>
 #include<windows.h>
+#include"BinaryTree.h"
 
-typedef int QDataType;
+typedef BTNode* QDataType;
 
 //队列的链表
 typedef struct QListNode
