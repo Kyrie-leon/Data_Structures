@@ -1,5 +1,5 @@
 #pragma once
-
+#include<windows.h>
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -10,9 +10,11 @@ typedef struct BinaryTreeNode
 	BTDataType _data;	// 当前节点值域
 	struct BinaryTreeNode* _left;	// 指向当前节点左孩子
 	struct BinaryTreeNode* _right;	// 指向当前节点右孩子
-	BTDataType _data;
 }BTNode;
 
+
+//构建二叉树节点
+BTNode* CreateNode(int x);
 
 //构建二叉树
 BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi);
@@ -21,16 +23,16 @@ BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi);
 void BinaryTreeDestory(BTDataType** root);
 
 //二叉树结点个数
-int BinaryTreeSize(BTNode* root);
+int TreeSize(BTNode* root);
 
 // 二叉树叶子节点个数
-int BinaryTreeLeafSize(BTNode* root);
+int TreeLeafSize(BTNode* root);
 
 // 二叉树第k层节点个数
-int BinaryTreeLevelKSize(BTNode* root, int k);
+int TreeLevelKSize(BTNode* root, int k);
 
 // 二叉树查找值为x的节点
-BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
+BTNode* TreeFind(BTNode* root, BTDataType x);
 
 // 二叉树前序遍历
 void PrevOrder(BTNode* root);
@@ -45,4 +47,4 @@ void PostOrder(BTNode* root);
 void LevelOrder(BTNode* root);
 
 // 判断二叉树是否是完全二叉树
-int BinaryTreeComplete(BTNode* root);
+int TreeComplete(BTNode* root);
