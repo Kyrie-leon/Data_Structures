@@ -176,3 +176,34 @@ BTNode* TreeFind(BTNode* root, BTDataType x)
 
 	return NULL;
 }
+
+// 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
+BTNode* CreateTree(BTDataType* str, int* pi)
+{
+	if (str[*pi] == '#')
+	{
+		(*pi)++;
+		return NULL;
+	}
+	else
+	{
+		BTNode* root = (BTNode *)malloc(sizeof(BTNode));
+		root->_data = str[*pi];
+		(*pi)++;
+		root->_left = CreateTree(str, pi);
+		root->_right = CreateTree(str, pi);
+		return root;
+	}
+}
+
+//二叉树销毁
+void BinaryTreeDestory(BTDataType** root)
+{
+	BTNode* cur = *root;
+	if (cur) {
+		BinaryTreeDestory(&cur->_left);
+		BinaryTreeDestory(&cur->_right);
+		free(cur);
+		*root = NULL;
+	}
+}
