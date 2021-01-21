@@ -16,8 +16,8 @@ typedef struct BinaryTreeNode
 //构建二叉树节点
 BTNode* CreateNode(int x);
 
-//构建二叉树
-BTNode* BinaryTreeCreate(BTDataType* a, int n, int* pi);
+//构建二叉树通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
+BTNode* CreateTree(BTDataType* a, int* pi);
 
 //二叉树销毁
 void BinaryTreeDestory(BTDataType** root);
