@@ -70,15 +70,85 @@ void ShellSort(int* a, int n)
 	
 }
 
-// 选择排序
-void SelectSort(int* a, int n)
+
+// 堆排序
+
+void AdjustDwon(int* a, int n, int root)
 {
+	//向下调整算法，建大堆排升序
+	int parent = root;
+	int child = root * 2 + 1;
+	while (child < n)
+	{
+		//选出左右孩子中较大的
+		if (child + 1 < n && a[child + 1] > a[child])
+		{
+			child++;
+		}
+
+		//父节点与较大的孩子节点比较，如果小于孩子节点，则交换
+		if (a[parent] < a[child])
+		{
+			int tmp = a[parent];
+			a[parent] = a[child];
+			a[child] = tmp;
+			//更新父节点和子节点
+			parent = child;
+			child = parent * 2 + 1;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 }
 
-// 堆排序
-void AdjustDwon(int* a, int n, int root);
-void HeapSort(int* a, int n);
+void HeapSort(int* a, int n)
+{
+	//1.建堆，升序算法建大堆
+	for (int i = (n - 2) / 2; i >= 0; --i)
+	{
+		AdjustDwon(a, n, i);
+	}
+
+	//2.排序，每次执行向下调整将最小的元素调整到最后，然后删除该元素继续调整
+	int end = n - 1;
+	while (end > 0)
+	{
+		int tmp = a[0];
+		a[0] = a[end];
+		a[end] = tmp;
+		AdjustDwon(a, end, 0);	//每次从根节点开始执行向下调整算法
+		--end;
+	}
+}
 
 // 冒泡排序
-void BubbleSort(int* a, int n);
+void BubbleSort(int* a, int n)
+{	
+
+	for (int i = 0; i < n - 1; ++i)
+	{
+		//1 一趟排序，从第一个数开始和后面的数字比较
+		for (int j = i; j < n - 1 - i; ++j)
+		{
+			//将大数向后冒
+			if (a[j] > a[j + 1])
+			{
+				int tmp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = tmp;
+			}
+		}
+	}
+}
+
+// 计数排序
+void CountSort(int* a, int n)
+{
+	//1.找出数组中最大最小值
+
+	//2.
+}
+
