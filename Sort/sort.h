@@ -2,6 +2,7 @@
 #include<windows.h>
 #include<time.h>
 #include<stdlib.h>
+#include<assert.h>
 
 //´òÓ¡Êý×é
 void PrintArr(int* a, int n);
