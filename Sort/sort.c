@@ -1,5 +1,12 @@
 #include"sort.h"
 
+//交换数据
+void Swap(int* px, int* py)
+{
+	int tmp = *px;
+	*px = *py;
+	*py = tmp;
+}
 
 //打印数组
 void PrintArr(int* a, int n)
@@ -127,28 +134,147 @@ void HeapSort(int* a, int n)
 // 冒泡排序
 void BubbleSort(int* a, int n)
 {	
-
-	for (int i = 0; i < n - 1; ++i)
+	//2.比较n-1趟
+	for (int i = 0; i <n-1; ++i)
 	{
-		//1 一趟排序，从第一个数开始和后面的数字比较
-		for (int j = i; j < n - 1 - i; ++j)
+		//1.第1趟排序，从第1个元素开始到n-1个元素结束,比较n-1次
+		for (int j = i; j < n-1-i; ++j)
 		{
-			//将大数向后冒
+			//如果左边大于右边，则交换位置
 			if (a[j] > a[j + 1])
 			{
-				int tmp = a[j];
-				a[j] = a[j + 1];
-				a[j + 1] = tmp;
+				Swap(&a[j], &a[j + 1]);
 			}
 		}
+		PrintArr(a, n);
+	}
+
+}
+
+// 冒泡排序优化
+void BubbleSort1(int* a, int n)
+{
+	
+	//2.比较n-1趟
+	for (int i = 0; i <n - 1; ++i)
+	{
+		int exchange = 0;
+		//1.第1趟排序，从第1个元素开始到n-1个元素结束,比较n-1次
+		for (int j = i; j < n - 1 - i; ++j)
+		{
+			//如果左边大于右边，则交换位置
+			if (a[j] > a[j + 1])
+			{
+				exchange = 1;
+				Swap(&a[j], &a[j + 1]);
+			}
+		}
+		PrintArr(a, n);
+		if (exchange == 0)
+			break;
+	}
+
+}
+
+//三数取中
+int GetMidIndex(int* a, int left, int right)
+{
+	int mid = (right - left) / 2;
+	if (a[left] > a[right])
+	{
+		if (a[mid] > a[left])
+			return left;
+		else if (a[mid] < a[right])
+			return right;
+		else
+			return mid;
+		
+	}
+	else if (a[right] > a[left])
+	{
+		if (a[mid] > a[right])
+			return right;
+		else if (a[mid] < a[left])
+			return left;
+		else
+			return mid;
+	}
+	else
+	{
+
 	}
 }
 
-// 计数排序
-void CountSort(int* a, int n)
+// 快速排序递归实现
+// 快速排序hoare版本,左右指针法
+int PartSort1(int* a, int left, int right)
 {
-	//1.找出数组中最大最小值
+	//三数取中解决有序，
+	//begin mid right
+	//int midIndex = GetMidIndex(a, left, right);
+	//Swap(&a[midIndex], a[left]);
+	
 
-	//2.
+	//1.选择关键值用于划分区间，选左值作为key	
+	int keyindex = left;
+	//2.选左值让右边先走，优先找到最小值，左右交换，最后将左值与key交换
+	while (left < right)
+	{
+		//右边先找小,找到就停下来
+		while (left < right && a[right] >= a[keyindex])
+		{
+			--right;
+		}
+		//左边找到大的停下来
+		while (left < right && a[left] <= a[keyindex])
+		{
+			++left;
+		}
+		Swap(&a[left], &a[right]);
+	}
+
+	Swap(&a[keyindex], &a[left]);
+
+	return left;
+
 }
+// 快速排序挖坑法
+int PartSort2(int* a, int left, int right)
+{
+	return 0;
+}
+
+// 快速排序前后指针法
+int PartSort3(int* a, int left, int right)
+{
+	int keyindex = right;
+	int prev = left-1;
+	int cur = left;
+	while (cur < right)
+	{
+		if (a[cur] < a[keyindex] && ++prev != cur)
+		{
+			Swap(&a[cur], &a[prev]);
+		}
+		++cur;
+	}
+	Swap(&a[cur], &a[++prev]);
+
+	return prev;
+}
+
+void QuickSort(int* a, int left, int right)
+{
+	assert(a);
+	if (left >= right)
+		return;
+
+	//1.先划分区间
+	int div = PartSort3(a, left, right);
+	//2.判断左右区间是否有序
+	QuickSort(a, left, div - 1);
+	QuickSort(a, div + 1, right);
+
+}
+
 
