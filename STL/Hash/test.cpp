@@ -7,6 +7,7 @@ using namespace std;
 #include"HashTable.hpp"
 #include"unordered_map.h"
 #include"unordered_set.h"
+#include"BitSet.h"
 
 void Test_unordered_set()
 {
@@ -43,9 +44,11 @@ int main()
 {
 	//Close::TestHashTable();
 
-	leon::test_unordered_map();
-	test_unordered_map();
-	leon::test_unordered_set();
-	Test_unordered_set();
+	//leon::test_unordered_map();
+	//test_unordered_map();
+	//leon::test_unordered_set();
+	//Test_unordered_set();
+
+	leon::testbitset();
 	return 0;
 }
